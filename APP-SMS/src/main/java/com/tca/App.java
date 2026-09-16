@@ -15,7 +15,7 @@ public class App {
 		while (true) {
 			Scanner sc = new Scanner(System.in);
 
-			System.out.println(" Menu ");
+			System.out.println("...Menu...");
 			System.out.println(" 1.Save ");
 			System.out.println(" 2.Fetch By Id ");
 			System.out.println(" 3.Fetch By Name");
