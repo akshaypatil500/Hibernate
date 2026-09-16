@@ -1,0 +1,65 @@
+package com.tca;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import com.tca.entites.Student;
+
+public class App {
+    public static void main(String[] args) {
+
+        Configuration configuration = null;
+        SessionFactory sf = null;
+        Session session = null;
+        Transaction txn = null;
+
+        try {
+            configuration = new Configuration();
+            configuration.configure();
+
+            configuration.addAnnotatedClass(Student.class);
+
+            sf = configuration.buildSessionFactory();
+            session = sf.openSession();
+            txn = session.beginTransaction();
+
+        //----------------Pagination--------------------------
+            
+            Scanner sc=new Scanner(System.in);
+            
+            Query query =session.createQuery("from Student");
+            query.setMaxResults(3);
+            
+            for(int i=0;i<=9;i=i+3)
+            {
+            	query.setFirstResult(i);  //0
+            	List<Student> list=query.list();
+            	
+            	for(Student data:list)
+            	{
+            		System.out.println(data.getRno()+" "+data.getName()+" "+data.getPer()+" "+data.getCity());
+            	
+            	}
+            	System.out.println("--------------------------------------------------------------------------");
+            	
+            	System.out.println("Press any key to continue");
+            	sc.next();
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            txn.rollback();
+        } finally {
+
+            session.close();
+            sf.close();
+        }
+    }
+}

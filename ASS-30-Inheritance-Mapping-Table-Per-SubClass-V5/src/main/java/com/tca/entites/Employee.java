@@ -1,0 +1,39 @@
+package com.tca.entites;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity(name="EMP2")
+@Inheritance(strategy = InheritanceType.JOINED)
+
+
+public class Employee {
+	
+	@Id
+	@Column(name="eid")
+	private Integer eid;
+	
+	@Column(name="ename")
+	private String ename;
+	
+	
+	public Integer getEid() {
+		return eid;
+	}
+	public void setEid(Integer eid) {
+		this.eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+}
